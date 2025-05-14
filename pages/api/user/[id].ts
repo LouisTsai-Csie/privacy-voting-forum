@@ -3,6 +3,13 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { supabase } from '@/app/lib/supabase'
 
+// Define the type for allowed update fields
+type UserUpdateFields = {
+  wallet_address?: string;
+  passport_id?: string;
+  self_verified?: boolean;
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const {
     query: { id },
@@ -49,9 +56,31 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const body = req.body;
 
+        // Validate required fields if they are being updated
+        if (body.wallet_address === '' || body.passport_id === '') {
+          return res.status(400).json({ 
+            message: 'Invalid field values',
+            error: 'wallet_address and passport_id cannot be empty'
+          });
+        }
+
+        // Only allow updating specific fields
+        const allowedUpdates: UserUpdateFields = {
+          wallet_address: body.wallet_address,
+          passport_id: body.passport_id,
+          self_verified: body.self_verified
+        };
+
+        // Remove undefined fields
+        (Object.keys(allowedUpdates) as Array<keyof UserUpdateFields>).forEach(key => {
+          if (allowedUpdates[key] === undefined) {
+            delete allowedUpdates[key];
+          }
+        });
+
         const { data, error } = await supabase
           .from('User')
-          .update(body)
+          .update(allowedUpdates)
           .eq('id', id)
           .select()
           .single();

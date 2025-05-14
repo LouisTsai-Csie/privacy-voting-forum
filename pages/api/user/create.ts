@@ -10,16 +10,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const body = req.body
 
     // Validate required fields
-    if (!body.wallet_address) {
+    if (!body.wallet_address || !body.passport_id) {
       return res.status(400).json({ 
         message: 'Missing required fields',
-        required: ['wallet_address']
+        required: ['wallet_address', 'passport_id']
       })
     }
 
     // Set default value for self_verified if not provided
     const userData = {
       wallet_address: body.wallet_address,
+      passport_id: body.passport_id,
       self_verified: body.self_verified ?? false
     }
 
