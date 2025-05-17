@@ -4,29 +4,50 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { useProposalContext } from "@/app/context/ProposalContext";
+import { useVoteContext } from "@/app/context/VoteContext";
 
 export default function Home() {
-  const { addProposal } = useProposalContext();
+  const { addVote } = useVoteContext();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [deadline, setDeadline] = useState("");
+  const [end_date, setEndDate] = useState("");
   const [options, setOptions] = useState(["", ""]);
 
-  const handleVote = () => {
-    const newProposal = {
-      id: Date.now().toString(),
+  const handleVote = async () => {
+    const newVote = {
       title,
       description,
-      deadline,
-      options,
+      end_date,
+      options: options.map((text) => ({ text })),
+      creator: "creator-id",
     };
-    addProposal(newProposal);
-    alert(`You have initiated a vote: ${title}`);
+
+    try {
+      const response = await fetch("/api/poll/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newVote),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error details:", errorData);
+        throw new Error("Failed to create vote");
+      }
+
+      const data = await response.json();
+      addVote(data.data);
+      alert(`You have initiated a vote: ${title}`);
+    } catch (error) {
+      console.error("Error creating vote:", error);
+    }
+
     // Clear the form
     setTitle("");
     setDescription("");
-    setDeadline("");
+    setEndDate("");
     setOptions(["", ""]);
   };
 
@@ -77,8 +98,8 @@ export default function Home() {
           <input
             id="deadline"
             type="date"
-            value={deadline}
-            onChange={(e) => setDeadline(e.target.value)}
+            value={end_date}
+            onChange={(e) => setEndDate(e.target.value)}
             className="border rounded p-2 w-1/1"
             required
           />
@@ -103,7 +124,7 @@ export default function Home() {
       </div>
       <div className="flex flex-wrap justify-center gap-4 mt-4">
         <Button asChild>
-          <Link href="/proposals">View Vote List</Link>
+          <Link href="/votes">View Vote List</Link>
         </Button>
       </div>
     </section>

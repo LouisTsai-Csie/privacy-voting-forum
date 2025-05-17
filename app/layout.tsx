@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/navbar";
 import "./globals.css";
-import { ProposalProvider } from "@/app/context/ProposalContext";
+import { VoteProvider } from "@/app/context/VoteContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +29,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ProposalProvider>
-          {" "}
+        <VoteProvider>
           <Navbar />
           {children}
-        </ProposalProvider>
+        </VoteProvider>
       </body>
     </html>
   );

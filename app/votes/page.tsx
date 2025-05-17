@@ -1,29 +1,29 @@
 "use client";
 
-import { useProposalContext, Proposal } from "@/app/context/ProposalContext";
+import { useVoteContext, Vote } from "@/app/context/VoteContext";
 import Link from "next/link";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
-export default function ProposalsList() {
-  const { proposals } = useProposalContext();
+export default function VotesList() {
+  const { votes } = useVoteContext();
   const [selectedVotes, setSelectedVotes] = useState<{ [key: string]: string }>(
     {}
   );
   const [confirmVote, setConfirmVote] = useState<{
-    proposalId: string;
+    voteId: string;
     option: string;
   } | null>(null);
 
-  const handleVoteSelection = (proposalId: string, option: string) => {
-    setSelectedVotes({ ...selectedVotes, [proposalId]: option });
-    setConfirmVote({ proposalId, option });
+  const handleVoteSelection = (voteId: string, option: string) => {
+    setSelectedVotes({ ...selectedVotes, [voteId]: option });
+    setConfirmVote({ voteId, option });
   };
 
   const handleVote = () => {
     if (confirmVote) {
       alert(
-        `You have voted for ${confirmVote.option} on proposal ${confirmVote.proposalId}`
+        `You have voted for ${confirmVote.option} on vote ${confirmVote.voteId}`
       );
       setConfirmVote(null);
     }
@@ -35,39 +35,35 @@ export default function ProposalsList() {
       <h2 className="text-2xl font-semibold mt-8">Vote List</h2>
       <h2 className="text-2xl font-semibold mt-8"></h2>
       <ul className="w-full max-w-lg">
-        {proposals.length === 0 ? (
+        {votes.length === 0 ? (
           <li className="text-lg text-muted-foreground">
             No votes available at the moment.
           </li>
         ) : (
-          proposals.map((proposal: Proposal) => (
+          votes.map((vote: Vote) => (
             <li
-              key={proposal.id}
+              key={vote.id}
               className="border border-gray-300 rounded-md p-4 mb-4"
             >
               <div className="flex flex-col items-start">
-                <h2 className="text-2xl font-semibold mb-2">
-                  {proposal.title}
-                </h2>
+                <h2 className="text-2xl font-semibold mb-2">{vote.title}</h2>
                 <p className="text-lg text-muted-foreground mb-2">
-                  {proposal.description}
+                  {vote.description}
                 </p>
-                <p className="text-sm mb-2">Deadline: {proposal.deadline}</p>
+                <p className="text-sm mb-2">Deadline: {vote.deadline}</p>
                 <div className="mt-2">
                   <span className="font-semibold text-lg">Vote Options:</span>
-                  {proposal.options.map((option: string, index: number) => (
+                  {vote.options.map((option: string, index: number) => (
                     <div key={index} className="flex items-center mb-2 text-lg">
                       <input
                         type="radio"
-                        id={`option-${proposal.id}-${index}`}
-                        name={`proposal-${proposal.id}`}
+                        id={`option-${vote.id}-${index}`}
+                        name={`vote-${vote.id}`}
                         value={option}
-                        onChange={() =>
-                          handleVoteSelection(proposal.id, option)
-                        }
+                        onChange={() => handleVoteSelection(vote.id, option)}
                       />
                       <label
-                        htmlFor={`option-${proposal.id}-${index}`}
+                        htmlFor={`option-${vote.id}-${index}`}
                         className="ml-2"
                       >
                         {option}
@@ -79,7 +75,7 @@ export default function ProposalsList() {
                   Vote
                 </Button>
                 <Link
-                  href={`/proposals/${proposal.id}`}
+                  href={`/votes/${vote.id}`}
                   className="text-blue-500 underline"
                 >
                   View Details
