@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Privacy Voting Forum",
-  description: "去中心化隱私投票平台",
+  description: "Privacy Voting Forum",
 };
 
 export default function RootLayout({
@@ -31,7 +31,6 @@ export default function RootLayout({
       >
         <ProposalProvider>
           {" "}
-          {/* 包裹 ProposalProvider */}
           <Navbar />
           {children}
         </ProposalProvider>

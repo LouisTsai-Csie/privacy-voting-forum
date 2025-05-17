@@ -1,7 +1,7 @@
 /* components/navbar.tsx
  * ------------------------------------------------------------
- * 全站導覽列 Navbar（純 UI 版）
- * － 目前尚不含 wallet 或 db 互動。
+ * Global Navigation Bar (UI Only)
+ * - Currently does not include wallet or db interactions.
  * ------------------------------------------------------------
  */
 "use client";
@@ -12,19 +12,19 @@ import { cn } from "@/lib/utils";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
 
 /* ======================
-   導覽列連結設定
-   之後要新增頁面只要 push 進 link 即可
+   Navigation Links Configuration
+   To add new pages, just push into the links array
    ====================== */
 const links = [
-  { href: "/", label: "首頁" },
-  { href: "/votes", label: "投票列表" },
-  { href: "/create", label: "發起投票" },
-  { href: "/project-intro", label: "專案介紹" },
-  { href: "/about_us", label: "關於我們" },
+  { href: "/", label: "Home" },
+  { href: "/votes", label: "Vote List" },
+  { href: "/create", label: "Initiate Vote" },
+  { href: "/project-intro", label: "Project Intro" },
+  { href: "/about_us", label: "About Us" },
 ];
 
 /* ======================
-   Navbar 主元件
+   Navbar Main Component
    ====================== */
 export default function Navbar() {
   const pathname = usePathname();
@@ -32,12 +32,12 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/70 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        {/* 左邊 Logo */}
+        {/* Left Logo */}
         <Link href="/" className="text-lg font-semibold">
           Privacy Voting Forum
         </Link>
 
-        {/* ========= 桌機版導覽列（sm 以上顯示） ========= */}
+        {/* ========= Desktop Navigation (visible on sm and above) ========= */}
         <nav className="hidden gap-6 sm:flex">
           {links.map((l) => (
             <Link
@@ -55,9 +55,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* ======== ★ 新增：手機版漢堡鍵 + 抽屜選單 ★ ======== */}
+        {/* ======== ★ New: Mobile Hamburger Button + Drawer Menu ★ ======== */}
         <Sheet>
-          {/* 觸發：三條線按鈕，在 sm 以下顯示 */}
+          {/* Trigger: Three-line button, visible below sm */}
           <SheetTrigger asChild>
             <button
               className="sm:hidden inline-flex h-10 w-10 items-center justify-center rounded-md hover:bg-accent"
@@ -79,7 +79,7 @@ export default function Navbar() {
             </button>
           </SheetTrigger>
 
-          {/* Drawer 內容：垂直導覽列 */}
+          {/* Drawer Content: Vertical Navigation */}
           <SheetContent side="left" className="w-64 bg-white">
             <nav className="mt-8 flex flex-col gap-4 pl-6">
               {links.map((l) => (
@@ -101,10 +101,10 @@ export default function Navbar() {
         </Sheet>
 
         {/* =========================================================
-             右邊預留區：日後插入錢包連線或使用者資訊
+             Right Reserved Area: For future wallet connection or user info
           ========================================================= */}
         <div className="hidden sm:flex items-center gap-2">
-          {/* 目前留白 */}
+          {/* Currently empty */}
         </div>
       </div>
     </header>

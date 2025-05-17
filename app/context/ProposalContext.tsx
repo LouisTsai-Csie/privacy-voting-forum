@@ -4,7 +4,6 @@
 import React, { createContext, useContext, useState } from "react";
 
 export interface Proposal {
-  // 確保這裡是 export
   id: string;
   title: string;
   description: string;

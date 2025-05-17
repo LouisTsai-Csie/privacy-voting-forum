@@ -3,26 +3,30 @@ import Link from "next/link";
 const teamMembers = [
   {
     name: "陳竹欣 Bamboo",
-    position: "智能合約工程師",
-    description: "撰寫與測試智能合約，確保合約邏輯正確與安全性。",
+    position: "Smart Contract Engineer",
+    description:
+      "Writes and tests smart contracts to ensure correct logic and security.",
     photo: "/images/team_member/bamboo.png",
   },
   {
     name: "蔡佳誠 Louis",
-    position: "後端工程師",
-    description: "DB 設計與 API 實作，確保後端資料流穩定運作。",
+    position: "Backend Engineer",
+    description:
+      "Designs databases and implements APIs to ensure stable backend data flow.",
     photo: "/images/team_member/louis.png",
   },
   {
     name: "步家霖 Charlie",
-    position: "前端工程師",
-    description: "開發使用者介面，實作投票頁與留言功能等前端畫面。",
+    position: "Frontend Engineer",
+    description:
+      "Develops user interfaces, implements voting pages, and comment features.",
     photo: "/images/team_member/charlie.png",
   },
   {
     name: "許智皓 Howard",
-    position: "整合工程師",
-    description: "錢包與智能合約整合，並導入 LLM 提升平台互動性。",
+    position: "Integration Engineer",
+    description:
+      "Integrates wallets and smart contracts, and introduces LLM to enhance platform interactivity.",
     photo: "/images/team_member/howard.png",
   },
 ];
@@ -30,14 +34,16 @@ const teamMembers = [
 export default function About() {
   return (
     <section className="mx-auto flex max-w-5xl flex-col items-center gap-8 px-4 py-24 text-center">
-      <h1 className="text-4xl font-bold">關於我們</h1>
+      <h1 className="text-4xl font-bold sm:text-5xl">Privacy Voting Forum</h1>
+      <h2 className="text-2xl font-semibold mt-8">About Us</h2>
       <p className="max-w-2xl text-lg text-muted-foreground">
-        我們是一個致力於推動去中心化治理的團隊，透過區塊鏈技術和創新的解決方案，提升社群治理的透明度和公正性。
+        We are a team dedicated to promoting decentralized governance. Through
+        blockchain technology and innovative solutions, we aim to enhance the
+        transparency and fairness of community governance.
       </p>
-      <h2 className="text-2xl font-semibold mt-8">團隊成員</h2>
+      <h2 className="text-2xl font-semibold mt-8">Team Members</h2>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mt-4">
         {" "}
-        {/* 調整為四列排版 */}
         {teamMembers.map((member, index) => (
           <div key={index} className="border rounded-lg p-4">
             <img
@@ -53,17 +59,20 @@ export default function About() {
           </div>
         ))}
       </div>
-      <h2 className="text-2xl font-semibold">我們的使命</h2>
+      <h2 className="text-2xl font-semibold">Our Mission</h2>
       <p className="max-w-2xl text-lg text-muted-foreground">
-        我們的使命是建立一個安全、透明且可驗證的投票平台，讓每個人的聲音都能被聽見，並確保投票過程的公正性。
+        Our mission is to build a secure, transparent, and verifiable voting
+        platform where every voice can be heard, ensuring the fairness of the
+        voting process.
       </p>
-      <h2 className="text-2xl font-semibold">聯繫我們</h2>
+      <h2 className="text-2xl font-semibold">Contact Us</h2>
       <p className="max-w-2xl text-lg text-muted-foreground">
-        如果您對我們的項目有興趣或有任何問題，請隨時聯繫我們！您可以通過以下連結了解更多信息：
+        If you are interested in our project or have any questions, please feel
+        free to contact us! You can learn more through the following link:
       </p>
       <div className="flex flex-wrap justify-center gap-4">
         <Link href="/" className="text-primary underline">
-          返回首頁
+          Return to Home
         </Link>
       </div>
     </section>

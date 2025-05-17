@@ -22,8 +22,8 @@ export default function Home() {
       options,
     };
     addProposal(newProposal);
-    alert(`您已發起投票: ${title}`);
-    // 清空表單
+    alert(`You have initiated a vote: ${title}`);
+    // Clear the form
     setTitle("");
     setDescription("");
     setDeadline("");
@@ -42,14 +42,12 @@ export default function Home() {
 
   return (
     <section className="mx-auto flex max-w-5xl flex-col items-center gap-8 px-4 py-24 text-center">
-      <h1 className="text-4xl font-bold sm:text-5xl">
-        去中心化．隱私投票．<span className="text-primary">更好治理</span>
-      </h1>
-      <h2 className="text-2xl font-semibold mt-8">發起投票</h2>
+      <h1 className="text-4xl font-bold sm:text-5xl">Privacy Voting Forum</h1>
+      <h2 className="text-2xl font-semibold mt-8">Initiate Vote</h2>
       <div className="flex flex-col items-center gap-4 w-full max-w-5xl">
         <div className="flex flex-col w-full">
           <label className="text-left" htmlFor="title">
-            投票標題
+            Vote Title
           </label>
           <input
             id="title"
@@ -62,7 +60,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col w-full">
           <label className="text-left" htmlFor="description">
-            投票敘述
+            Vote Description
           </label>
           <textarea
             id="description"
@@ -74,7 +72,7 @@ export default function Home() {
         </div>
         <div className="flex flex-col w-full">
           <label className="text-left" htmlFor="deadline">
-            投票截止日期
+            Voting Deadline
           </label>
           <input
             id="deadline"
@@ -88,7 +86,7 @@ export default function Home() {
         {options.map((option, index) => (
           <div key={index} className="flex flex-col w-full">
             <label className="text-left" htmlFor={`option-${index}`}>
-              選項 {index + 1}
+              Option {index + 1}
             </label>
             <input
               id={`option-${index}`}
@@ -100,12 +98,12 @@ export default function Home() {
             />
           </div>
         ))}
-        <Button onClick={addOption}>新增選項</Button>
-        <Button onClick={handleVote}>發起投票</Button>
+        <Button onClick={addOption}>Add Option</Button>
+        <Button onClick={handleVote}>Initiate Vote</Button>
       </div>
       <div className="flex flex-wrap justify-center gap-4 mt-4">
         <Button asChild>
-          <Link href="/proposals">查看投票列表</Link>
+          <Link href="/proposals">View Vote List</Link>
         </Button>
       </div>
     </section>
