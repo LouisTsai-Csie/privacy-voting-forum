@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/navbar";
 import "./globals.css";
 import { PollProvider } from "@/app/context/PollContext";
+import { Providers } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +30,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <PollProvider>
-          <Navbar />
-          {children}
-        </PollProvider>
+        <Providers>
+          <PollProvider>
+            <Navbar />
+            {children}
+          </PollProvider>
+        </Providers>
       </body>
     </html>
   );
