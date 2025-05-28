@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const { data, error } = await supabase
       .from('User')
-      .insert([userData])
+      .upsert(userData, { onConflict: 'wallet_address' })
       .select()
       .single()
 
