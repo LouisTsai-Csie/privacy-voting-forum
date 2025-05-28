@@ -21,7 +21,6 @@ import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useConnect, useAccount, useDisconnect } from "wagmi";
 import { metaMask } from "@wagmi/connectors";
 import { hashEndpointWithScope } from "@selfxyz/core";
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 
 /* ======================
    Navigation Links Configuration
